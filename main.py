@@ -1,3 +1,61 @@
+import os
+import sys
+import logging
+
+# إعداد logging فوري
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    stream=sys.stdout
+)
+
+print("=" * 50)
+print("🚀 بدء تشغيل البوت - المرحلة 1")
+print("=" * 50)
+
+# تحقق من التوكن أولاً
+BOT_TOKEN = os.environ.get('BOT_TOKEN')
+if not BOT_TOKEN:
+    print("❌ ERROR: BOT_TOKEN not found in environment variables")
+    sys.exit(1)
+else:
+    print(f"✅ BOT_TOKEN loaded: {BOT_TOKEN[:10]}...")
+
+# تحقق من المكتبات الأساسية
+try:
+    print("✅ تحميل المكتبات الأساسية...")
+    import asyncio
+    import signal
+    import re
+    import io
+    from datetime import datetime, timedelta
+    print("✅ المكتبات الأساسية loaded")
+except ImportError as e:
+    print(f"❌ خطأ في تحميل المكتبات الأساسية: {e}")
+    sys.exit(1)
+
+# تحقق من مكتبات telegram
+try:
+    print("✅ تحميل مكتبات telegram...")
+    from telegram import Update, ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup, InputMediaPhoto
+    from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes, CallbackQueryHandler
+    print("✅ مكتبات telegram loaded")
+except ImportError as e:
+    print(f"❌ خطأ في تحميل مكتبات telegram: {e}")
+    sys.exit(1)
+
+print("✅ جميع المكتبات loaded successfully")
+print("=" * 50)
+
+# ⚙️ الإعدادات - عدل هذه فقط
+ADMIN_USERNAMES = ["Qh321a","A_y_g278","yazan_14op90"]
+REQUIRED_CHANNEL = "elitesportexpectations"
+SUBSCRIPTION_SETTINGS = {
+    "monthly_price": 75000,
+    "prediction_price": 25000,
+}
+
+# ... باقي الكود كما هو
 import sqlite3
 import logging
 import asyncio
@@ -4519,4 +4577,5 @@ def main():
         sys.exit(1)
 
 if __name__ == '__main__':
+
     main()
